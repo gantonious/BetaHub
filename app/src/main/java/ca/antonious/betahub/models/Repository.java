@@ -1,10 +1,12 @@
 package ca.antonious.betahub.models;
 
+import java.io.Serializable;
+
 /**
  * Created by George on 2017-11-12.
  */
 
-public class Repository {
+public class Repository implements Serializable {
     private String name;
     private int totalStars;
 

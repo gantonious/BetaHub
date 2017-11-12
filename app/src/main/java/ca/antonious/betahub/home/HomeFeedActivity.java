@@ -52,7 +52,9 @@ public class HomeFeedActivity extends AppCompatActivity {
     }
 
     private void launchRepositoryDetails(Repository repository) {
-        startActivity(new Intent(this, RepositoryDetailsActivity.class));
+        Intent repositoryDetailsIntent = new Intent(this, RepositoryDetailsActivity.class);
+        repositoryDetailsIntent.putExtra(RepositoryDetailsActivity.EXTRA_REPOSITORY, repository);
+        startActivity(repositoryDetailsIntent);
     }
 
     @Override
