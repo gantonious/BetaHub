@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.List;
@@ -23,20 +24,23 @@ public class HomeFeedActivity extends AppCompatActivity {
 
     private RepositoryApi repositoryApi;
     private HomeFeedAdapter homeFeedAdapter;
+    private ProgressBar loadingProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_feed);
 
+        initializeViews();
         initializeGithubApi();
-        initializeListView();
     }
 
-    private void initializeListView() {
-        homeFeedAdapter = new HomeFeedAdapter(this, R.id.home_list_view);
+    private void initializeViews() {
+        loadingProgressBar = (ProgressBar) findViewById(R.id.loading_indicator);
 
         ListView homeFeedListView = (ListView) findViewById(R.id.home_list_view);
+        homeFeedAdapter = new HomeFeedAdapter(this, R.id.home_list_view);
+
         homeFeedListView.setAdapter(homeFeedAdapter);
         homeFeedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,12 +70,15 @@ public class HomeFeedActivity extends AppCompatActivity {
             public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
                 homeFeedAdapter.clear();
                 homeFeedAdapter.addAll(response.body());
+                loadingProgressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<Repository>> call, Throwable t) {
                 Toast.makeText(HomeFeedActivity.this, "Looks like something went wrong", Toast.LENGTH_SHORT)
                         .show();
+                
+                loadingProgressBar.setVisibility(View.GONE);
             }
         });
     }
