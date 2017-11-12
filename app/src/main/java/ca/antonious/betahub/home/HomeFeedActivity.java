@@ -1,7 +1,10 @@
 package ca.antonious.betahub.home;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -11,6 +14,7 @@ import ca.antonious.betahub.R;
 import ca.antonious.betahub.data.MockRepositoryApi;
 import ca.antonious.betahub.data.RepositoryApi;
 import ca.antonious.betahub.models.Repository;
+import ca.antonious.betahub.repository.details.RepositoryDetailsActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,12 +35,24 @@ public class HomeFeedActivity extends AppCompatActivity {
 
     private void initializeListView() {
         homeFeedAdapter = new HomeFeedAdapter(this, R.id.home_list_view);
+
         ListView homeFeedListView = (ListView) findViewById(R.id.home_list_view);
         homeFeedListView.setAdapter(homeFeedAdapter);
+        homeFeedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Repository repository = (Repository) adapterView.getAdapter().getItem(i);
+                launchRepositoryDetails(repository);
+            }
+        });
     }
 
     private void initializeGithubApi() {
         repositoryApi = new MockRepositoryApi();
+    }
+
+    private void launchRepositoryDetails(Repository repository) {
+        startActivity(new Intent(this, RepositoryDetailsActivity.class));
     }
 
     @Override
