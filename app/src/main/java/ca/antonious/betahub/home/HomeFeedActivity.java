@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFeedActivity extends AppCompatActivity {
 
-    public static final String USERNAME = "google";
+    public static final String USERNAME = "MLH";
 
     private RepositoryApi repositoryApi;
     private HomeFeedAdapter homeFeedAdapter;

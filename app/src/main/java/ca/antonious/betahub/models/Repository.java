@@ -13,6 +13,26 @@ public class Repository implements Serializable {
     private String name;
     @SerializedName("stargazers_count")
     private int totalStars;
+    @SerializedName("forks")
+    private int totalForks;
+    @SerializedName("watchers_count")
+    private int totalWatchers;
+
+    public int getTotalForks() {
+        return totalForks;
+    }
+
+    public void setTotalForks(int totalForks) {
+        this.totalForks = totalForks;
+    }
+
+    public int getTotalWatchers() {
+        return totalWatchers;
+    }
+
+    public void setTotalWatchers(int totalWatchers) {
+        this.totalWatchers = totalWatchers;
+    }
 
     public String getName() {
         return name;

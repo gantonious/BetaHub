@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.antonious.betahub.repository.details.RepositoryDetailsActivity"
+    android:orientation="vertical"
     android:layout_margin="16dp">
 
     <TextView
@@ -12,6 +12,27 @@
         android:layout_height="wrap_content"
         android:text="Repo Name"
         android:fontFamily="sans-serif-light"
-        android:textSize="24sp" />
+        android:textSize="32sp"/>
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/total_forks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/total_stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/total_watchers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="4dp"/>
+
+</LinearLayout>
