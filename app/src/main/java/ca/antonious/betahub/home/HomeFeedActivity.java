@@ -9,18 +9,23 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import ca.antonious.betahub.R;
-import ca.antonious.betahub.data.MockRepositoryApi;
 import ca.antonious.betahub.data.RepositoryApi;
 import ca.antonious.betahub.models.Repository;
 import ca.antonious.betahub.repository.details.RepositoryDetailsActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFeedActivity extends AppCompatActivity {
+
+    public static final String USERNAME = "google";
 
     private RepositoryApi repositoryApi;
     private HomeFeedAdapter homeFeedAdapter;
@@ -52,7 +57,11 @@ public class HomeFeedActivity extends AppCompatActivity {
     }
 
     private void initializeGithubApi() {
-        repositoryApi = new MockRepositoryApi();
+        repositoryApi = new Retrofit.Builder()
+                .baseUrl("http://api.github.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(RepositoryApi.class);
     }
 
     private void launchRepositoryDetails(Repository repository) {
@@ -65,7 +74,7 @@ public class HomeFeedActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        repositoryApi.getPopularRepositories().enqueue(new Callback<List<Repository>>() {
+        repositoryApi.getAllRepositories(USERNAME).enqueue(new Callback<List<Repository>>() {
             @Override
             public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
                 homeFeedAdapter.clear();
@@ -77,7 +86,7 @@ public class HomeFeedActivity extends AppCompatActivity {
             public void onFailure(Call<List<Repository>> call, Throwable t) {
                 Toast.makeText(HomeFeedActivity.this, "Looks like something went wrong", Toast.LENGTH_SHORT)
                         .show();
-                
+
                 loadingProgressBar.setVisibility(View.GONE);
             }
         });

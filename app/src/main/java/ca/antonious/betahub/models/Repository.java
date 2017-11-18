@@ -1,5 +1,7 @@
 package ca.antonious.betahub.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +9,9 @@ import java.io.Serializable;
  */
 
 public class Repository implements Serializable {
+    @SerializedName("name")
     private String name;
+    @SerializedName("stargazers_count")
     private int totalStars;
 
     public String getName() {
