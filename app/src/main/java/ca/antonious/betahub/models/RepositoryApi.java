@@ -1,8 +1,7 @@
-package ca.antonious.betahub.data;
+package ca.antonious.betahub.models;
 
 import java.util.List;
 
-import ca.antonious.betahub.models.Repository;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

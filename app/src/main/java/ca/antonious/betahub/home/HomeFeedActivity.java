@@ -9,12 +9,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import java.util.List;
 
 import ca.antonious.betahub.R;
-import ca.antonious.betahub.data.RepositoryApi;
+import ca.antonious.betahub.models.RepositoryApi;
 import ca.antonious.betahub.models.Repository;
 import ca.antonious.betahub.repository.details.RepositoryDetailsActivity;
 import retrofit2.Call;
